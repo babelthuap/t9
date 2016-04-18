@@ -3,8 +3,6 @@ $(document).ready(function() {
 
   var NUM_TO_DISPLAY = 100;
 
-  var possibilities = [];
-
   var digitMap = {
     2: new Set(['a', 'b', 'c']),
     3: new Set(['d', 'e', 'f']),
@@ -15,7 +13,6 @@ $(document).ready(function() {
     8: new Set(['t', 'u', 'v']),
     9: new Set(['w', 'x', 'y', 'z']),
   };
-
 
   function startWith(num) {
     if (num.length === 0) {
@@ -33,6 +30,13 @@ $(document).ready(function() {
   }
 
 
+  $('#clear').click(function(e) {
+    e.preventDefault();
+    $digits.val('');
+    updateResults();
+  });
+
+
   $('#dialpad').on('click', 'button', function() {
     console.log('pad');
     var num = $(this).find('strong').text();
@@ -45,6 +49,8 @@ $(document).ready(function() {
   $digits.on('input', updateResults)
          .focus();
 
+
+  var possibilities = [];
 
   function updateResults() {
     var digits = $digits.val();
@@ -68,13 +74,6 @@ $(document).ready(function() {
     $('#words').empty()
                .append(topWords);
   }
-
-
-  $('#clear').click(function(e) {
-    e.preventDefault();
-    $digits.val('');
-    updateResults();
-  });
 
 
   $('#displayAll').click(function(e) {
