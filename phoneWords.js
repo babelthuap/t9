@@ -46,8 +46,7 @@ $(document).ready(function() {
 
 
   var $digits = $('#digits');
-  $digits.on('input', updateResults)
-         .focus();
+  $digits.on('input', updateResults);
 
 
   var possibilities = [];
@@ -58,7 +57,6 @@ $(document).ready(function() {
     if (digits !== validDigits) {
       $digits.val(validDigits);
     }
-    $digits.focus();
 
     possibilities = startWith(validDigits);
     var topWords = possibilities.slice(0, NUM_TO_DISPLAY).join(', ');
