@@ -1,6 +1,8 @@
 $(document).ready(function() {
   'use strict';
 
+  var NUM_TO_DISPLAY = 100;
+
   var possibilities = [];
 
   var digitMap = {
@@ -31,36 +33,54 @@ $(document).ready(function() {
   }
 
 
-  $('#digits').bind('input', function() {
-    var digits = $(this).val();
+  $('#dialpad').on('click', 'button', function() {
+    console.log('pad');
+    var num = $(this).find('strong').text();
+    $('#digits').val( $('#digits').val() + num );
+    updateResults();
+  });
+
+
+  var $digits = $('#digits');
+  $digits.on('input', updateResults)
+         .focus();
+
+
+  function updateResults() {
+    var digits = $digits.val();
     var validDigits = digits.replace(/[^2-9]/g, '');
     if (digits !== validDigits) {
-      $(this).val(validDigits);
+      $digits.val(validDigits);
     }
+    $digits.focus();
 
     possibilities = startWith(validDigits);
-    var topWords = possibilities.slice(0, 30).map(function(word) {
-      return $('<li>').text(word);
-    });
+    var topWords = possibilities.slice(0, NUM_TO_DISPLAY).join(', ');
 
-    if (possibilities.length > 30) {
+    if (possibilities.length > NUM_TO_DISPLAY) {
+      topWords += ', ...';
       $('#displayAll').removeClass('hidden');
+      $('#num').text(possibilities.length);
     } else {
       $('#displayAll').addClass('hidden');
     }
 
-    $('#words').empty().append(topWords);
-  });
+    $('#words').empty()
+               .append(topWords);
+  }
 
-  $('#digits').focus();
+
+  $('#clear').click(function(e) {
+    e.preventDefault();
+    $digits.val('');
+    updateResults();
+  });
 
 
   $('#displayAll').click(function(e) {
     e.preventDefault();
     $('#displayAll').addClass('hidden');
-    var words = possibilities.map(function(word) {
-      return $('<li>').text(word);
-    });
-    $('#words').empty().append(words);
+    $('#words').empty()
+               .append( possibilities.join(', ') );
   });
 });

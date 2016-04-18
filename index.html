@@ -8,12 +8,33 @@
 </head>
 
 <body>
-  <img src="http://i1-news.softpedia-static.com/images/news2/How-to-Change-Tone-Length-on-Samsung-Galaxy-I9000-Dialpad-2.jpg" alt="dialpad">
   <h1>T9</h1>
-  <p>Enter digits (2-9) here: <input type="text" id="digits" /></p>
-  <p>Possible words starting with those digits:</p>
-  <ol id="words"></ol>
-  <em id="displayAll" class="hidden"><a href="#">display all</a></em>
+  <hr>
+  <h3>
+    Enter digits (2-9) here: <input type="text" id="digits" />
+    <button id="clear">clear</button>
+  </h3>
+  
+  <div id="dialpad">
+    <button disabled><strong>1</strong><br>&nbsp;</button>
+    <button><strong>2</strong><br>ABC</button>
+    <button><strong>3</strong><br>DEF</button> <br>
+    <button><strong>4</strong><br>GHI</button>
+    <button><strong>5</strong><br>JKL</button>
+    <button><strong>6</strong><br>MNO</button> <br>
+    <button><strong>7</strong><br>PQRS</button>
+    <button><strong>8</strong><br>TUV</button>
+    <button><strong>9</strong><br>WXYZ</button> <br>
+    <button disabled><strong>*</strong><br>&nbsp;</button>
+    <button disabled><strong>0</strong><br>&nbsp;</button>
+    <button disabled><strong>#</strong><br>&nbsp;</button> <br>
+  </div>
+
+  <h3>Possible words starting with those digits:</h3>
+  <div id="results">
+    <p id="words"></p>
+    <em id="displayAll" class="hidden"><a href="#">display all <span id="num"></span> words</a></em>
+  </div>
 
   <script src="jquery.min.js"></script>
   <script src="10000mostFreqWords.js"></script>
